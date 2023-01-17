@@ -41,9 +41,16 @@ function App() {
       <CommentListContainer
         lists={aboutLists.lists}
         setModifyNow={setModifyNow}
+        isChanged={isChanged}
+        setIsChanged={setIsChanged}
       />
       <PageListContainer />
-      <FormContainer modifyNow={modifyNow} setModifyNow={setModifyNow} />
+      <FormContainer
+        modifyNow={modifyNow}
+        setModifyNow={setModifyNow}
+        isChanged={isChanged}
+        setIsChanged={setIsChanged}
+      />
     </div>
   );
 }

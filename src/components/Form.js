@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 
-function Form({ modifyNow, setModifyNow }) {
+function Form({ modifyNow, setModifyNow, isChanged, setIsChanged }) {
   const createList = (e) => {
     e.preventDefault();
     axios
@@ -12,12 +12,10 @@ function Form({ modifyNow, setModifyNow }) {
         content: e.target[2].value,
         createdAt: e.target[3].value,
       })
-      .then(
-        // console.log(
-        //   "update 성공 / isChanged 변경"
-        // )
-        e.target.reset()
-      );
+      .then(() => {
+        e.target.reset();
+        setIsChanged(!isChanged);
+      });
   };
 
   const modifyList = (e) => {

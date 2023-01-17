@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 
-function CommentList({ lists, setModifyNow }) {
+function CommentList({ lists, setModifyNow, isChanged, setIsChanged }) {
   const addModifyData = (e, comment) => {
     setModifyNow({ ...comment, isModify: true });
   };
@@ -10,7 +10,7 @@ function CommentList({ lists, setModifyNow }) {
   const deleteList = (e, comment) => {
     axios
       .delete(`http://localhost:4000/comments/${comment.id}`)
-      .then(console.log("삭제완료, 1페이지로 이동 = isChanged 변경"));
+      .then(setIsChanged(!isChanged));
   };
 
   return lists.map((comment, key) => (
