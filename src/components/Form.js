@@ -5,27 +5,35 @@ import styled from "styled-components";
 function Form({ modifyNow }) {
   const createList = (e) => {
     e.preventDefault();
-    // console.log(e.target[0].value);
-    // console.log(e.target[1].value);
-    // console.log(e.target[2].value);
-    // console.log(e.target[3].value);
+    axios
+      .post(`http://localhost:4000/comments`, {
+        profile_url: e.target[0].value,
+        author: e.target[1].value,
+        content: e.target[2].value,
+        createdAt: e.target[3].value,
+      })
+      .then(
+        // console.log(
+        //   "update 성공 / isChanged 변경, 1페이지 이동,"
+        // )
+        e.target.reset()
+      );
   };
 
   const modifyList = (e) => {
     e.preventDefault();
-    // let objs = {
-    //   profile_url: e.target[0].value,
-    //   author: e.target[1].value,
-    //   content: e.target[2].value,
-    //   createdAt: e.target[3].value,
-    // };
-    // console.log(objs);
-    axios.put(`http://localhost:4000/comments/${modifyNow.id}`, {
-      profile_url: e.target[0].value,
-      author: e.target[1].value,
-      content: e.target[2].value,
-      createdAt: e.target[3].value,
-    });
+    axios
+      .put(`http://localhost:4000/comments/${modifyNow.id}`, {
+        profile_url: e.target[0].value,
+        author: e.target[1].value,
+        content: e.target[2].value,
+        createdAt: e.target[3].value,
+      })
+      .then(
+        console.log(
+          "update 성공 / isChanged 변경으로 리렌더 및 1페이지 이동 등 과제"
+        )
+      );
   };
 
   return (
