@@ -27,6 +27,7 @@ function Form({
 
   const modifyList = (e) => {
     e.preventDefault();
+
     const newLists = aboutLists.lists.map((el) => {
       if (el.id === modifyNow.id) {
         return {
@@ -38,7 +39,9 @@ function Form({
         };
       } else return el;
     });
+
     const newAboutLists = { ...aboutLists, lists: [...newLists] };
+
     axios
       .put(`http://localhost:4000/comments/${modifyNow.id}`, {
         profile_url: e.target[0].value,
@@ -47,9 +50,6 @@ function Form({
         createdAt: e.target[3].value,
       })
       .then(() => {
-        console.log(
-          "update 성공 / 페이지 유지(리로딩 또는 리스트 값만 바꾸기)"
-        );
         e.target.reset();
 
         setModifyNow({

@@ -21,13 +21,11 @@ const Page = styled.button`
   margin-right: 3px;
 `;
 
-function PageList() {
+function PageList({ aboutLists, setAboutLists }) {
   const pageArray = [];
+  console.log(aboutLists);
 
-  pageArray.push(
-    // 임시로 페이지 하나만 설정했습니다.
-    <Page key="1">1</Page>
-  );
+  pageArray.push(<Page key="1">1</Page>);
 
   return <PageListStyle>{pageArray}</PageListStyle>;
 }

@@ -44,7 +44,10 @@ function App() {
         isChanged={isChanged}
         setIsChanged={setIsChanged}
       />
-      <PageListContainer />
+      <PageListContainer
+        aboutLists={aboutLists}
+        setAboutLists={setAboutLists}
+      />
       <FormContainer
         aboutLists={aboutLists}
         setAboutLists={setAboutLists}
