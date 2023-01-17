@@ -106,7 +106,7 @@ function PageList({ aboutLists, setAboutLists }) {
           id={el}
           key={`${el}${index}`}
           active={el === aboutLists.page ? true : false}
-          className={`${el === "..." ? "none" : "pageBox"}
+          className={`${el === "..." ? "none" : ""}
           }`}
         >
           {el}
@@ -121,6 +121,10 @@ export default PageList;
 const PageListStyle = styled.div`
   margin-bottom: 20px;
   text-align: center;
+  .none {
+    border: none;
+    background-color: white;
+  }
 `;
 
 const Page = styled.button`
