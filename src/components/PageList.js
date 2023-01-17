@@ -42,7 +42,9 @@ function PageList({ aboutLists, setAboutLists }) {
   //dummyPagenation.pageInfo.totalPages = maxPage
 
   if (Number(aboutLists.page) === 1) {
+    console.log(pages, "pre1");
     pages = [];
+    console.log(pages, "next1");
     for (let i = 1; i <= Math.min(5, maxPage); i++) {
       pages.push(i);
     }
@@ -53,6 +55,7 @@ function PageList({ aboutLists, setAboutLists }) {
     } else if (maxPage > 1) {
       pages.push("Next");
     }
+    console.log(pages, "last1");
   } else if (Number(aboutLists.page) <= 4) {
     pages = ["Prev"];
     for (let i = 1; i <= Math.min(5, maxPage); i++) {
@@ -66,7 +69,9 @@ function PageList({ aboutLists, setAboutLists }) {
       pages.push("Next");
     }
   } else if (Number(aboutLists.page) >= 5) {
+    console.log(pages, "pre");
     pages = ["Prev", 1, "..."];
+    console.log(pages, "next");
     for (
       let i = Number(aboutLists.page) - 2;
       i <= Math.min(Number(aboutLists.page) + 2, maxPage);
@@ -92,14 +97,14 @@ function PageList({ aboutLists, setAboutLists }) {
   }
 
   // pageArray.push(<Page key="1">1</Page>);
-
+  console.log(pages);
   return (
     <PageListStyle>
-      {pages.map((el) => (
+      {pages.map((el, index) => (
         <Page
           onClick={pageHandler}
           id={el}
-          key={el}
+          key={`${el}${index}`}
           active={el === aboutLists.page ? true : false}
           className={`${el === "..." ? "none" : "pageBox"}
           }`}
