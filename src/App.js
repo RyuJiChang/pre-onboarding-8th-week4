@@ -46,6 +46,8 @@ function App() {
       />
       <PageListContainer />
       <FormContainer
+        aboutLists={aboutLists}
+        setAboutLists={setAboutLists}
         modifyNow={modifyNow}
         setModifyNow={setModifyNow}
         isChanged={isChanged}

@@ -2,7 +2,14 @@ import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 
-function Form({ modifyNow, setModifyNow, isChanged, setIsChanged }) {
+function Form({
+  aboutLists,
+  setAboutLists,
+  modifyNow,
+  setModifyNow,
+  isChanged,
+  setIsChanged,
+}) {
   const createList = (e) => {
     e.preventDefault();
     axios
@@ -20,6 +27,18 @@ function Form({ modifyNow, setModifyNow, isChanged, setIsChanged }) {
 
   const modifyList = (e) => {
     e.preventDefault();
+    const newLists = aboutLists.lists.map((el) => {
+      if (el.id === modifyNow.id) {
+        return {
+          id: modifyNow.id,
+          profile_url: e.target[0].value,
+          author: e.target[1].value,
+          content: e.target[2].value,
+          createdAt: e.target[3].value,
+        };
+      } else return el;
+    });
+    const newAboutLists = { ...aboutLists, lists: [...newLists] };
     axios
       .put(`http://localhost:4000/comments/${modifyNow.id}`, {
         profile_url: e.target[0].value,
@@ -41,6 +60,8 @@ function Form({ modifyNow, setModifyNow, isChanged, setIsChanged }) {
           id: 0,
           isModify: false,
         });
+
+        setAboutLists(newAboutLists);
       });
   };
 
