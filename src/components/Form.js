@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 
-function Form({ modifyNow }) {
+function Form({ modifyNow, setModifyNow }) {
   const createList = (e) => {
     e.preventDefault();
     axios
@@ -14,7 +14,7 @@ function Form({ modifyNow }) {
       })
       .then(
         // console.log(
-        //   "update 성공 / isChanged 변경, 1페이지 이동,"
+        //   "update 성공 / isChanged 변경"
         // )
         e.target.reset()
       );
@@ -29,11 +29,21 @@ function Form({ modifyNow }) {
         content: e.target[2].value,
         createdAt: e.target[3].value,
       })
-      .then(
+      .then(() => {
         console.log(
-          "update 성공 / isChanged 변경으로 리렌더 및 1페이지 이동 등 과제"
-        )
-      );
+          "update 성공 / 페이지 유지(리로딩 또는 리스트 값만 바꾸기)"
+        );
+        e.target.reset();
+
+        setModifyNow({
+          profile_url: "",
+          author: "",
+          content: "",
+          createdAt: "",
+          id: 0,
+          isModify: false,
+        });
+      });
   };
 
   return (

@@ -43,7 +43,7 @@ function App() {
         setModifyNow={setModifyNow}
       />
       <PageListContainer />
-      <FormContainer modifyNow={modifyNow} />
+      <FormContainer modifyNow={modifyNow} setModifyNow={setModifyNow} />
     </div>
   );
 }

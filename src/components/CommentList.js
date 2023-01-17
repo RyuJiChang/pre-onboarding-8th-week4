@@ -1,9 +1,16 @@
+import axios from "axios";
 import React from "react";
 import styled from "styled-components";
 
 function CommentList({ lists, setModifyNow }) {
   const addModifyData = (e, comment) => {
     setModifyNow({ ...comment, isModify: true });
+  };
+
+  const deleteList = (e, comment) => {
+    axios
+      .delete(`http://localhost:4000/comments/${comment.id}`)
+      .then(console.log("삭제완료, 1페이지로 이동 = isChanged 변경"));
   };
 
   return lists.map((comment, key) => (
@@ -18,7 +25,7 @@ function CommentList({ lists, setModifyNow }) {
 
       <ButtonContainer>
         <button onClick={(e) => addModifyData(e, comment)}>수정</button>
-        <button>삭제</button>
+        <button onClick={(e) => deleteList(e, comment)}>삭제</button>
       </ButtonContainer>
 
       <hr />
