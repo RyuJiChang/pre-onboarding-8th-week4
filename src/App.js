@@ -5,17 +5,45 @@ import FormContainer from "./containers/FormContainer";
 import axios from "axios";
 
 function App() {
-  const [lists, setLists] = useState([]);
+  const [aboutLists, setAboutLists] = useState({
+    page: 1,
+    amount: 0,
+    limit: 4,
+    lists: [],
+  });
+  const [isChanged, setIsChanged] = useState(false);
+  const [modifyNow, setModifyNow] = useState({
+    profile_url: "",
+    author: "",
+    content: "",
+    createdAt: "",
+    id: 0,
+    isModify: false,
+  });
+
   useEffect(() => {
-    axios.get("http://localhost:4000/comments").then((data) => {
-      setLists(data.data);
-    });
-  }, []);
+    axios
+      .get(
+        `http://localhost:4000/comments?_page=${1}&_limit=${4}&_order=desc&_sort=id`
+      )
+      .then((response) => {
+        setAboutLists({
+          ...aboutLists,
+          page: 1,
+          amount: response.headers["x-total-count"],
+          lists: response.data,
+        });
+      });
+  }, [isChanged]);
+
   return (
     <div>
-      <CommentListContainer lists={lists} />
+      <CommentListContainer
+        lists={aboutLists.lists}
+        setModifyNow={setModifyNow}
+      />
       <PageListContainer />
-      <FormContainer />
+      <FormContainer modifyNow={modifyNow} />
     </div>
   );
 }
